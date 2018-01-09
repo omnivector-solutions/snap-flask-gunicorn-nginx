@@ -69,4 +69,5 @@ db.sqlite3
 stage/
 prime/
 parts/
-flask-gunicorn_0.1_amd64.snap
+flask-gunicorn-nginx_0.1_amd64.snap
+snap/.snapcraft/
