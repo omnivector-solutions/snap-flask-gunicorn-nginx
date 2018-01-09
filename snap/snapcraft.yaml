@@ -44,22 +44,10 @@ parts:
       cp -r ./* $SNAPCRAFT_PART_INSTALL/flask-app/
 
   wrappers:
-    # Build after flask-gunicorn for debugging purposes.
-    # We want django-gunicorn to fail first in dev so we don't have
-    # to wait on these parts to complete before we know what has gone wrong.
-    # the after clause/stanza below can be remove in prod and/or once the nginx
-    # snap is decoupled from this one
-    after: [flask-gunicorn]
     plugin: dump
     source: snap/wrap/
 
   nginx:
-    # Build after flask-gunicorn for debugging purposes.
-    # We want django-gunicorn to fail first in dev so we don't have
-    # to wait on these parts to complete before we know what has gone wrong.
-    # the after clause/stanza below can be remove in prod and/or once the nginx
-    # snap is decoupled from this one
-    after: [flask-gunicorn]
     plugin: nginx
     source: snap/templates/
     install: |
