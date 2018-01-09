@@ -64,24 +64,9 @@ target/
 # pyenv python configuration file
 .python-version
 
-# Test Files
-t1.py
-t2.py 
-t3.py
-t4.py
-t5.py
-t6.py
-t7.py
-t8.py
-t9.py
-t10.py
-input/
-output/
-output_flat/
-csv_format.py
-csv_run.py
-config_test.py
-flatfile_run.py
-
 db.sqlite3
 .venv/
+stage/
+prime/
+parts/
+flask-gunicorn_0.1_amd64.snap

@@ -40,8 +40,8 @@ parts:
     prime:
       - -.venv
     install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/flask-gunicorn
-      cp -r ./* $SNAPCRAFT_PART_INSTALL/flask-gunicorn/
+      mkdir -p $SNAPCRAFT_PART_INSTALL/flask-app
+      cp -r ./* $SNAPCRAFT_PART_INSTALL/flask-app/
 
   wrappers:
     # Build after flask-gunicorn for debugging purposes.
