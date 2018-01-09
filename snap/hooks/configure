@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eux
+
+# Gunicorn + NGINX logging dir
+mkdir -p ${SNAP_COMMON}/log
+
+# Flask Secrets
+mkdir -p ${SNAP_COMMON}/flask_secrets
+
+# NGINX dirs
+mkdir -p $SNAP_COMMON/nginx/logs
+
+# CHMOD dirs
+chmod -R 755 $SNAP_COMMON

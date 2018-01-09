@@ -1,0 +1,68 @@
+name: flask-gunicorn-nginx
+version: '0.1' 
+summary: flask-gunicorn-nginx
+description: |
+  Flask-Gunicorn-Nginx Example
+
+grade: stable
+confinement: classic
+
+apps:
+
+  flask-gunicorn:
+    daemon: simple
+    plugs: [network-bind]
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages/
+      FLASK_SECRETS: $SNAP_COMMON/flask_secrets
+    command: wrappers/flask-gunicorn
+
+  nginx:
+    daemon: simple
+    plugs: [network-bind]
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    command: wrappers/nginx-run
+    reload-command: wrappers/nginx-reload
+
+
+parts:
+
+  flask-gunicorn:
+    plugin: python
+    source: .
+    python-version: python3
+    requirements: requirements.txt
+    stage-packages: [libpq-dev,libssl-dev]
+    prime:
+      - -.venv
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/flask-gunicorn
+      cp -r ./* $SNAPCRAFT_PART_INSTALL/flask-gunicorn/
+
+  wrappers:
+    # Build after flask-gunicorn for debugging purposes.
+    # We want django-gunicorn to fail first in dev so we don't have
+    # to wait on these parts to complete before we know what has gone wrong.
+    # the after clause/stanza below can be remove in prod and/or once the nginx
+    # snap is decoupled from this one
+    after: [flask-gunicorn]
+    plugin: dump
+    source: snap/wrap/
+
+  nginx:
+    # Build after flask-gunicorn for debugging purposes.
+    # We want django-gunicorn to fail first in dev so we don't have
+    # to wait on these parts to complete before we know what has gone wrong.
+    # the after clause/stanza below can be remove in prod and/or once the nginx
+    # snap is decoupled from this one
+    after: [flask-gunicorn]
+    plugin: nginx
+    source: snap/templates/
+    install: |
+      rm $SNAPCRAFT_PART_INSTALL/nginx/conf/nginx.conf.default
+      rm $SNAPCRAFT_PART_INSTALL/nginx/conf/nginx.conf
+      mv ./nginx.conf.snap.template $SNAPCRAFT_PART_INSTALL/nginx/conf/nginx.conf

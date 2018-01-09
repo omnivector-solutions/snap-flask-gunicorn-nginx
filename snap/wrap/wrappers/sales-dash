@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+exec "$SNAP/bin/gunicorn" --chdir "$SNAP/flask-app" \
+    --bind unix:/tmp/flask-gunicorn.sock application:app \
+    --error-logfile /var/snap/sales-dash/common/log/gunicorn-error.log \
+    --access-logfile /var/snap/sales-dash/common/log/gunicorn-access.log "$@"
