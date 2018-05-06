@@ -1,0 +1,21 @@
+{
+  "name": "flask-gunicorn-nginx",
+  "version": "1.0.0",
+  "description": "Example Flask App Snap",
+  "repository": "git+https://github.com/omnivector-solutions/flask-gunicorn-nginx.git",
+  "author": "James Beedy <jamesbeedy@gmail.com>",
+  "license": "AGPLv3",
+  "bugs": {
+    "url": "https://github.com/omnivector-solutions/flask-gunicorn-nginx/issues"
+  },
+  "homepage": "https://github.com/omnivector-solutions/flask-gunicorn-nginx#readme",
+  "main": "application.py",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
+  },
+  "scripts": {
+    "postinstall": "cp -r node_modules/* static/ && rm -r node_modules/"
+  }
+}
