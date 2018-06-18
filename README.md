@@ -14,7 +14,7 @@ Nginx listens on the snap's private /tmp filesystem at `/tmp/flask-gunicorn.sock
 Build the snap
 
 ```bash
-$ sudo snapcraft
+$ snapcraft
 ```
 
 # Install
